@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Node / Vercel
+node_modules/
+.vercel/
+
+# Entorno y sistema
+.env
+.DS_Store
+Thumbs.db
+
+
+# Datos pesados (se descargan con src/fetch_istac.py)
+data/istac_raw.tsv

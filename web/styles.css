@@ -1,0 +1,758 @@
+/* =============================================================
+   NaitPrais - estilos
+   Colores inspirados en Canarias: cal de las fachadas, picón
+   volcánico, el Atlántico de noche y la buganvilla.
+   ============================================================= */
+
+:root {
+  --cal: #f6f7f4;          /* fondo */
+  --blanco: #ffffff;
+  --picon: #221e1b;        /* texto */
+  --ceniza: #625d58;       /* texto secundario */
+  --linea: #dcdbd5;
+  --atlantico: #103a5c;    /* color principal */
+  --atlantico-medio: #2f6690;
+  --bruma: #dde7ef;
+  --reservada: #cfdeeb;   /* noches reservadas en el calendario */
+  --buganvilla: #b3336b;   /* acento y botones */
+  --buganvilla-oscura: #8f2555;
+
+  --fuente: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --ancho: 1120px;
+  --radio: 10px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--cal);
+  color: var(--picon);
+  font-family: var(--fuente);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--atlantico);
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.15;
+  margin: 0 0 0.6em;
+}
+
+h1 {
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: var(--atlantico);
+}
+
+h2 {
+  font-size: clamp(1.8rem, 3.4vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+p {
+  margin: 0 0 1em;
+  max-width: 62ch;
+}
+
+:focus-visible {
+  outline: 3px solid var(--buganvilla);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.contenedor {
+  width: min(100% - 2.5rem, var(--ancho));
+  margin-inline: auto;
+}
+
+/* ---------- Botones ---------- */
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.4rem;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.boton--principal {
+  background: var(--buganvilla);
+  color: var(--blanco);
+}
+
+.boton--principal:hover {
+  background: var(--buganvilla-oscura);
+}
+
+.boton--secundario {
+  border-color: var(--atlantico);
+  color: var(--atlantico);
+}
+
+.boton--secundario:hover {
+  background: var(--atlantico);
+  color: var(--blanco);
+}
+
+.boton--pequeno {
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+}
+
+/* ---------- Cabecera ---------- */
+.cabecera {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(246, 247, 244, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--linea);
+}
+
+.cabecera__fila {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  min-height: 68px;
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--atlantico);
+  text-decoration: none;
+}
+
+.menu {
+  display: flex;
+  gap: 1.6rem;
+  margin-left: auto;
+}
+
+.menu a {
+  color: var(--picon);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.menu a:hover {
+  color: var(--buganvilla);
+}
+
+/* ---------- Portada ---------- */
+.portada {
+  padding: clamp(3rem, 7vw, 6rem) 0 clamp(3rem, 6vw, 5rem);
+}
+
+.portada__rejilla {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+
+.entradilla {
+  font-size: 1.2rem;
+  color: var(--ceniza);
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin: 1.8rem 0 1.2rem;
+}
+
+.nota {
+  font-size: 0.95rem;
+  color: var(--ceniza);
+}
+
+/* ---------- Calendario (elemento principal de la portada) ---------- */
+.calendario {
+  margin: 0;
+  padding: 1.5rem;
+  background: var(--blanco);
+  border: 1px solid var(--linea);
+  border-radius: 18px;
+  box-shadow: 0 24px 48px -28px rgba(16, 58, 92, 0.45);
+}
+
+.calendario__cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.calendario__titulo {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.calendario__sub {
+  margin: 0;
+  color: var(--ceniza);
+  font-size: 0.95rem;
+}
+
+.selector {
+  display: inline-flex;
+  padding: 4px;
+  background: var(--cal);
+  border: 1px solid var(--linea);
+  border-radius: 999px;
+}
+
+.selector__opcion {
+  padding: 0.45rem 0.9rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ceniza);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.selector__opcion[aria-pressed="true"] {
+  background: var(--atlantico);
+  color: var(--blanco);
+}
+
+.calendario__semana,
+.calendario__dias {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.calendario__semana {
+  margin-bottom: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ceniza);
+  text-align: center;
+}
+
+.dia {
+  position: relative;
+  min-height: 58px;
+  padding: 6px 7px;
+  border-radius: 8px;
+  background: var(--blanco);
+  border: 1px dashed #b9b7b0;
+  font-variant-numeric: tabular-nums;
+  transition: background-color 0.25s ease;
+}
+
+.dia--vacio {
+  background: transparent;
+  border-color: transparent;
+}
+
+.dia__numero {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--ceniza);
+}
+
+.dia__precio {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.98rem;
+  font-weight: 700;
+}
+
+.dia--ocupada {
+  background: var(--reservada);
+  border: 1px solid transparent;
+}
+
+.dia--evento {
+  box-shadow: inset 0 0 0 2px var(--buganvilla);
+}
+
+.dia--cambio .dia__precio {
+  color: var(--buganvilla-oscura);
+}
+
+.calendario__pie {
+  margin-top: 1.2rem;
+}
+
+.leyenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  font-size: 0.85rem;
+  color: var(--ceniza);
+}
+
+.leyenda span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.muestra {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+}
+
+.muestra--ocupada {
+  background: var(--reservada);
+}
+
+.muestra--libre {
+  background: var(--blanco);
+  border: 1px dashed #b9b7b0;
+}
+
+.muestra--evento {
+  box-shadow: inset 0 0 0 2px var(--buganvilla);
+}
+
+.total {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  max-width: none;
+  margin: 1rem 0 0.4rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--linea);
+  font-size: 0.95rem;
+}
+
+.total strong {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--atlantico);
+  font-variant-numeric: tabular-nums;
+}
+
+.calendario__explicacion {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ceniza);
+}
+
+/* ---------- Secciones ---------- */
+.seccion {
+  padding: clamp(3.5rem, 8vw, 6rem) 0;
+}
+
+.seccion--clara {
+  background: var(--blanco);
+  border-block: 1px solid var(--linea);
+}
+
+.encabezado {
+  margin-bottom: 2.5rem;
+}
+
+.dos-columnas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 6vw, 5rem);
+}
+
+.subtitulo {
+  font-size: 1.05rem;
+  color: var(--ceniza);
+  font-weight: 700;
+}
+
+.subtitulo--espacio {
+  margin-top: 4rem;
+}
+
+/* Problema */
+.lista-perdidas {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lista-perdidas li {
+  padding: 1rem 0;
+  border-top: 1px solid var(--linea);
+}
+
+.lista-perdidas li:last-child {
+  border-bottom: 1px solid var(--linea);
+}
+
+.lista-perdidas strong {
+  display: block;
+  color: var(--atlantico);
+}
+
+/* Servicios */
+.servicios {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-top: 2px solid var(--atlantico);
+}
+
+.servicio {
+  padding: 1.6rem 1.6rem 1.2rem 0;
+  border-bottom: 1px solid var(--linea);
+}
+
+.servicio:nth-child(odd) {
+  border-right: 1px solid var(--linea);
+}
+
+.servicio:nth-child(even) {
+  padding-left: 1.6rem;
+}
+
+.servicio h3 {
+  color: var(--atlantico);
+}
+
+.servicio p {
+  margin: 0;
+  color: var(--ceniza);
+}
+
+/* Pasos (sí son una secuencia) */
+.pasos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pasos__numero {
+  display: inline-grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  margin-bottom: 0.8rem;
+  border-radius: 50%;
+  background: var(--atlantico);
+  color: var(--blanco);
+  font-weight: 800;
+}
+
+.pasos p {
+  margin: 0;
+  color: var(--ceniza);
+}
+
+/* Clientes */
+.clientes {
+  margin: 0;
+}
+
+.clientes div {
+  padding: 1rem 0;
+  border-top: 1px solid var(--linea);
+}
+
+.clientes dt {
+  font-weight: 700;
+  color: var(--atlantico);
+}
+
+.clientes dd {
+  margin: 0.2rem 0 0;
+  color: var(--ceniza);
+}
+
+/* Ejemplo */
+.tabla-contenedor {
+  overflow-x: auto;
+}
+
+.tabla {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.tabla th {
+  padding: 0.8rem 1rem 0.8rem 0;
+  border-bottom: 2px solid var(--atlantico);
+  font-size: 0.9rem;
+  color: var(--ceniza);
+}
+
+.tabla td {
+  padding: 1rem 1rem 1rem 0;
+  border-bottom: 1px solid var(--linea);
+  vertical-align: top;
+}
+
+.tabla .sube,
+.tabla .baja {
+  font-weight: 700;
+}
+
+.tabla .sube {
+  color: var(--buganvilla-oscura);
+}
+
+.tabla .baja {
+  color: var(--atlantico-medio);
+}
+
+.cita {
+  margin: 2.5rem 0 0;
+  padding-left: 1.4rem;
+  border-left: 4px solid var(--buganvilla);
+}
+
+.cita p {
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.cita footer {
+  color: var(--ceniza);
+  font-size: 0.95rem;
+}
+
+/* Propuesta de valor */
+.valor {
+  padding: clamp(3.5rem, 8vw, 6rem) 0;
+  background: var(--atlantico);
+  color: var(--blanco);
+}
+
+.valor__texto {
+  max-width: 30ch;
+  font-size: clamp(1.7rem, 3.6vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.valor__puntos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 2rem;
+  margin: 2rem 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--bruma);
+}
+
+.valor__puntos li::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 0.6rem;
+  border-radius: 50%;
+  background: var(--buganvilla);
+  vertical-align: middle;
+}
+
+/* Contacto */
+.datos-contacto {
+  margin: 2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.datos-contacto li {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--linea);
+}
+
+.datos-contacto span {
+  color: var(--ceniza);
+}
+
+.formulario {
+  padding: 1.8rem;
+  background: var(--blanco);
+  border: 1px solid var(--linea);
+  border-radius: 14px;
+}
+
+.campo {
+  margin-bottom: 1.1rem;
+}
+
+.campo label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid #bdbbb4;
+  border-radius: 8px;
+  background: var(--blanco);
+  color: var(--picon);
+  font: inherit;
+}
+
+.campo input[aria-invalid="true"] {
+  border-color: var(--buganvilla);
+}
+
+.formulario__estado {
+  margin: 1rem 0 0;
+  font-size: 0.95rem;
+}
+
+.formulario__estado--error {
+  color: var(--buganvilla-oscura);
+}
+
+/* Pie */
+.pie {
+  padding: 2rem 0;
+  border-top: 1px solid var(--linea);
+  font-size: 0.9rem;
+  color: var(--ceniza);
+}
+
+.pie__fila {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+}
+
+.pie p {
+  margin: 0;
+}
+
+/* ---------- Móvil ---------- */
+@media (max-width: 860px) {
+  .menu {
+    display: none;
+  }
+
+  .cabecera__fila {
+    justify-content: space-between;
+  }
+
+  .portada__rejilla,
+  .dos-columnas {
+    grid-template-columns: 1fr;
+  }
+
+  .servicios {
+    grid-template-columns: 1fr;
+  }
+
+  .servicio:nth-child(odd) {
+    border-right: 0;
+  }
+
+  .servicio:nth-child(even) {
+    padding-left: 0;
+  }
+
+  .pasos {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendario {
+    padding: 1rem;
+  }
+
+  .calendario__semana,
+  .calendario__dias {
+    gap: 4px;
+  }
+
+  .dia {
+    min-height: 46px;
+    padding: 4px 3px;
+  }
+
+  .dia__precio {
+    font-size: 0.72rem;
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    transition: none !important;
+  }
+}

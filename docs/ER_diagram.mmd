@@ -1,0 +1,54 @@
+%% Diagrama entidad-relación de NaitPrais - cliente Tabaiba Stays
+erDiagram
+    MUNICIPIOS ||--o{ VIVIENDAS : "tiene (FK id_municipio)"
+    VIVIENDAS ||--o{ RESERVAS : "recibe (FK id_vivienda)"
+    VIVIENDAS ||--o{ CALENDARIO_PRECIOS : "tiene un precio al día (FK id_vivienda)"
+    MUNICIPIOS ||--o{ MERCADO_ISTAC : "datos de mercado (FK id_municipio)"
+
+    MUNICIPIOS {
+        int id_municipio PK
+        string nombre "Adeje, Arona, Puerto de la Cruz..."
+        string isla "Tenerife o Gran Canaria"
+        string codigo_ine "para cruzar con el ISTAC"
+    }
+    VIVIENDAS {
+        int id_vivienda PK
+        int id_municipio FK
+        string num_registro "Registro General Turístico"
+        string tipo "apartamento, casa o villa"
+        int plazas
+        int dormitorios
+        int piscina "0 o 1"
+        int vista_mar "0 o 1"
+        int activa "0 o 1"
+    }
+    RESERVAS {
+        int id_reserva PK
+        int id_vivienda FK
+        date fecha_reserva
+        date fecha_entrada
+        date fecha_salida
+        int noches
+        int num_huespedes
+        float precio_noche
+        string canal "Airbnb, Booking, Vrbo o Web"
+        string pais_huesped
+        int puntuacion "1 a 5, vacío si no hay reseña"
+        string estado "confirmada o cancelada"
+    }
+    CALENDARIO_PRECIOS {
+        int id_vivienda PK, FK
+        date fecha PK
+        float precio_noche "precio publicado"
+        int ocupada "0 o 1, lo que queremos predecir"
+    }
+    MERCADO_ISTAC {
+        int id_municipio PK, FK
+        string periodo PK "AAAA-MM"
+        int viviendas_disponibles
+        int viviendas_reservadas "con al menos una reserva"
+        int plazas
+        float tasa_vivienda_reservada "en %"
+        float estancia_media "en noches"
+        float ingresos "en euros"
+    }

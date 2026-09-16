@@ -1,0 +1,50 @@
+{
+  "descripcion": "Resumen de los datos de Tabaiba Stays (simulados) y del ISTAC (reales)",
+  "periodo_cliente": [
+    "2024-01-01",
+    "2026-08-31"
+  ],
+  "filas_por_tabla": {
+    "municipios": 5,
+    "viviendas": 64,
+    "reservas": 5331,
+    "calendario_precios": 59930,
+    "mercado_istac": 455
+  },
+  "comprobaciones_correctas": true,
+  "indicadores_por_anio": {
+    "2024": {
+      "viviendas_con_actividad": 64,
+      "reservas": 2012,
+      "reservas_confirmadas": 1878,
+      "reservas_por_dia": 5.5,
+      "huespedes": 5656,
+      "ingresos_gestionados_eur": 1547075.0,
+      "ocupacion_pct": 67.6,
+      "precio_medio_publicado_eur": 96.8,
+      "estancia_media_noches": 8.4
+    },
+    "2025": {
+      "viviendas_con_actividad": 64,
+      "reservas": 2070,
+      "reservas_confirmadas": 1935,
+      "reservas_por_dia": 5.7,
+      "huespedes": 5786,
+      "ingresos_gestionados_eur": 1585755.0,
+      "ocupacion_pct": 71.4,
+      "precio_medio_publicado_eur": 99.9,
+      "estancia_media_noches": 8.3
+    },
+    "2026": {
+      "viviendas_con_actividad": 60,
+      "reservas": 1249,
+      "reservas_confirmadas": 1159,
+      "reservas_por_dia": 5.1,
+      "huespedes": 3497,
+      "ingresos_gestionados_eur": 1006945.0,
+      "ocupacion_pct": 69.6,
+      "precio_medio_publicado_eur": 102.8,
+      "estancia_media_noches": 8.5
+    }
+  }
+}

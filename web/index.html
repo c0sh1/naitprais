@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NaitPrais | Precios con datos para viviendas vacacionales en Canarias</title>
+  <meta name="description" content="NaitPrais recomienda el precio de cada vivienda vacacional mes a mes, combinando el histórico de reservas con los datos oficiales del ISTAC.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="cabecera">
+    <div class="contenedor cabecera__fila">
+      <a class="marca" href="#inicio" aria-label="NaitPrais, ir al inicio">
+        <img src="assets/logo.svg" alt="" width="36" height="36">
+        <span>NaitPrais</span>
+      </a>
+      <nav class="menu" aria-label="Principal">
+        <a href="#problema">Problema</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#ejemplo">Ejemplo</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <a class="boton boton--principal boton--pequeno" href="#contacto">Pedir una demo</a>
+    </div>
+  </header>
+
+  <main id="inicio">
+
+    <!-- Portada -->
+    <section class="portada">
+      <div class="contenedor portada__rejilla">
+        <div class="portada__texto">
+          <h1>Cada noche tiene su precio.</h1>
+          <p class="entradilla">
+            NaitPrais recomienda qué precio poner a cada vivienda vacacional, mes a mes.
+            Combinamos tu histórico de reservas con los datos oficiales del mercado canario
+            para que no pierdas reservas por caro ni dinero por barato.
+          </p>
+          <div class="acciones">
+            <a class="boton boton--principal" href="#contacto">Pedir una demo</a>
+            <a class="boton boton--secundario" href="#ejemplo">Ver un ejemplo</a>
+          </div>
+          <p class="nota">Para gestoras de viviendas vacacionales en Tenerife y Gran Canaria.</p>
+        </div>
+
+        <figure class="calendario" aria-labelledby="calendario-titulo">
+          <div class="calendario__cabecera">
+            <div>
+              <p class="calendario__titulo" id="calendario-titulo">Febrero de 2026</p>
+              <p class="calendario__sub">Apartamento de 4 plazas en Adeje</p>
+            </div>
+            <div class="selector" role="group" aria-label="Qué precio mostrar">
+              <button type="button" class="selector__opcion" data-modo="actual" aria-pressed="true">Precio actual</button>
+              <button type="button" class="selector__opcion" data-modo="naitprais" aria-pressed="false">Con NaitPrais</button>
+            </div>
+          </div>
+
+          <div class="calendario__semana" aria-hidden="true">
+            <span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span>
+          </div>
+          <div class="calendario__dias" id="calendario-dias"></div>
+
+          <figcaption class="calendario__pie">
+            <div class="leyenda">
+              <span><i class="muestra muestra--ocupada"></i>Noche reservada</span>
+              <span><i class="muestra muestra--libre"></i>Noche libre</span>
+              <span><i class="muestra muestra--evento"></i>Carnaval</span>
+            </div>
+            <p class="total">
+              Ingresos del mes con la misma ocupación:
+              <strong id="calendario-total">2700&nbsp;€</strong>
+            </p>
+            <p class="calendario__explicacion" id="calendario-explicacion" aria-live="polite">
+              La gestora cobró 100&nbsp;€ todas las noches, también en Carnaval.
+              El mes se llenó al 96&nbsp;% y las reservas de Carnaval llegaron con casi un mes de antelación.
+            </p>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Problema -->
+    <section class="seccion" id="problema">
+      <div class="contenedor dos-columnas">
+        <div>
+          <h2>Tres tarifas al año no bastan</h2>
+          <p>
+            La mayoría de las gestoras pequeñas ponen los precios en una hoja de cálculo:
+            una tarifa para temporada alta, otra para la media y otra para la baja.
+            Así, una vivienda cuesta lo mismo en una semana cualquiera que en Carnaval.
+          </p>
+          <p>
+            Canarias tiene su propio calendario: el invierno es temporada alta, hay fechas
+            con mucha demanda y las viviendas grandes se vacían en primavera y otoño.
+            Desde la Ley 6/2025, además, casi no entran viviendas nuevas, así que cada
+            vivienda que ya gestionas tiene que rendir al máximo.
+          </p>
+        </div>
+        <div>
+          <h3 class="subtitulo">Lo que pierde hoy una gestora</h3>
+          <ul class="lista-perdidas">
+            <li>
+              <strong>Noches vendidas por debajo del mercado.</strong>
+              Si una vivienda se llena semanas antes, su precio era demasiado bajo.
+            </li>
+            <li>
+              <strong>Noches vacías.</strong>
+              Las villas y casas grandes mantienen precios de temporada alta cuando nadie los paga.
+            </li>
+            <li>
+              <strong>Horas de trabajo manual.</strong>
+              Revisar precios vivienda por vivienda, comparando anuncios a mano.
+            </li>
+            <li>
+              <strong>Propietarios que se van.</strong>
+              Sin datos, es difícil explicarles por qué su vivienda gana lo que gana.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Qué hacemos y servicios -->
+    <section class="seccion seccion--clara" id="servicios">
+      <div class="contenedor">
+        <div class="encabezado">
+          <h2>Qué hacemos</h2>
+          <p>
+            Analizamos cómo se ha comportado cada vivienda y cómo se está moviendo su municipio,
+            y lo convertimos en una recomendación clara que cualquier persona del equipo puede aplicar.
+          </p>
+        </div>
+        <div class="servicios">
+          <article class="servicio">
+            <h3>Precio recomendado</h3>
+            <p>Un rango de precio para cada vivienda y cada mes, con las fechas especiales marcadas aparte.</p>
+          </article>
+          <article class="servicio">
+            <h3>Previsión de ocupación</h3>
+            <p>Qué ocupación esperar en los próximos meses, para organizar limpiezas y personal con tiempo.</p>
+          </article>
+          <article class="servicio">
+            <h3>Comparativa con el mercado</h3>
+            <p>Cómo está cada vivienda frente a la media oficial de su municipio, con los datos del ISTAC.</p>
+          </article>
+          <article class="servicio">
+            <h3>Panel de cartera</h3>
+            <p>Qué viviendas están por encima o por debajo del mercado y un resumen para enseñar a cada propietario.</p>
+          </article>
+        </div>
+
+        <h3 class="subtitulo subtitulo--espacio">Cómo funciona</h3>
+        <ol class="pasos">
+          <li>
+            <span class="pasos__numero" aria-hidden="true">1</span>
+            <h4>Nos pasas tus reservas</h4>
+            <p>Un CSV exportado de tu programa de reservas, con fechas, precios y viviendas.</p>
+          </li>
+          <li>
+            <span class="pasos__numero" aria-hidden="true">2</span>
+            <h4>Los cruzamos con el mercado</h4>
+            <p>Unimos tus datos con las viviendas reservadas, la estancia media y los ingresos oficiales de tu municipio.</p>
+          </li>
+          <li>
+            <span class="pasos__numero" aria-hidden="true">3</span>
+            <h4>Recibes tus precios</h4>
+            <p>Cada mes, un rango de precio por vivienda con el motivo de cada cambio.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Clientes -->
+    <section class="seccion" id="clientes">
+      <div class="contenedor dos-columnas">
+        <div>
+          <h2>Para quién es</h2>
+          <p>
+            Trabajamos con viviendas vacacionales inscritas en el Registro General Turístico de Canarias.
+            Empezamos en Tenerife y Gran Canaria.
+          </p>
+        </div>
+        <dl class="clientes">
+          <div>
+            <dt>Gestoras pequeñas y medianas</dt>
+            <dd>De 5 a 50 viviendas. Tienen datos de reservas, pero no tiempo para analizarlos.</dd>
+          </div>
+          <div>
+            <dt>Propietarios con varias viviendas</dt>
+            <dd>Que gestionan sus propios anuncios y quieren dejar de poner precios a ojo.</dd>
+          </div>
+          <div>
+            <dt>Complejos de apartamentos</dt>
+            <dd>Con muchas unidades parecidas en el mismo edificio y precios difíciles de mantener al día.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- Ejemplo de solución -->
+    <section class="seccion seccion--clara" id="ejemplo">
+      <div class="contenedor">
+        <div class="encabezado">
+          <h2>Un caso práctico: Tabaiba Stays</h2>
+          <p>
+            Tabaiba Stays gestiona 60 viviendas en Tenerife y Gran Canaria.
+            Estas son dos de las recomendaciones que salieron al analizar sus datos.
+          </p>
+        </div>
+
+        <div class="tabla-contenedor">
+          <table class="tabla">
+            <caption class="sr-only">Recomendaciones para dos viviendas de Tabaiba Stays</caption>
+            <thead>
+              <tr>
+                <th scope="col">Vivienda</th>
+                <th scope="col">Periodo analizado</th>
+                <th scope="col">Qué pasó</th>
+                <th scope="col">Recomendación</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Apartamento de 4 plazas en Adeje</td>
+                <td>Febrero de 2026</td>
+                <td>Ocupación del 96&nbsp;% a 100&nbsp;€ la noche, también en Carnaval</td>
+                <td class="sube">Subir a 110&nbsp;€ y a 125&nbsp;€ en Carnaval</td>
+              </tr>
+              <tr>
+                <td>Villa de 8 plazas en Mogán</td>
+                <td>Mayo y junio de 2025</td>
+                <td>Ocupación del 21&nbsp;% a 230&nbsp;€ la noche</td>
+                <td class="baja">Bajar a unos 195&nbsp;€ en temporada baja</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <blockquote class="cita">
+          <p>“Poníamos tres precios al año y los revisábamos en una hoja de cálculo. Ahora sabemos qué vivienda tocar cada mes y por qué.”</p>
+          <footer>Dirección de Tabaiba Stays</footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- Propuesta de valor -->
+    <section class="valor">
+      <div class="contenedor">
+        <p class="valor__texto">
+          Te decimos qué precio poner a cada vivienda cada mes y qué ocupación esperar,
+          combinando tu histórico de reservas con los datos oficiales del mercado canario.
+        </p>
+        <ul class="valor__puntos">
+          <li>Sencillo y en español</li>
+          <li>Basado en datos oficiales de Canarias</li>
+          <li>Cada recomendación explica su motivo</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Contacto -->
+    <section class="seccion" id="contacto">
+      <div class="contenedor dos-columnas">
+        <div>
+          <h2>Hablemos de tus viviendas</h2>
+          <p>
+            Cuéntanos cuántas viviendas gestionas y te enseñamos cómo quedarían sus precios
+            con tus propios datos.
+          </p>
+          <ul class="datos-contacto">
+            <li><span>Correo</span><a href="mailto:hola@naitprais.es">hola@naitprais.es</a></li>
+            <li><span>Oficina</span>Las Palmas de Gran Canaria</li>
+          </ul>
+        </div>
+
+        <form class="formulario" id="formulario" novalidate>
+          <div class="campo">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="nombre" type="text" autocomplete="name" required>
+          </div>
+          <div class="campo">
+            <label for="email">Correo electrónico</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="campo">
+            <label for="viviendas">Viviendas que gestionas</label>
+            <select id="viviendas" name="viviendas">
+              <option>De 1 a 4</option>
+              <option selected>De 5 a 20</option>
+              <option>De 21 a 50</option>
+              <option>Más de 50</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="mensaje">Mensaje (opcional)</label>
+            <textarea id="mensaje" name="mensaje" rows="4"></textarea>
+          </div>
+          <button class="boton boton--principal" type="submit">Enviar por correo</button>
+          <p class="formulario__estado" id="formulario-estado" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor pie__fila">
+      <p>© 2026 NaitPrais. Proyecto académico: Tabaiba Stays es una empresa ficticia.</p>
+      <p>Datos de mercado: Instituto Canario de Estadística (ISTAC).</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
