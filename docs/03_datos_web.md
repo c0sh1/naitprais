@@ -181,6 +181,7 @@ La web está en la carpeta `web/` y usa solo HTML, CSS y JavaScript, sin framewo
 | Nombre e identidad visual | Cabecera, logotipo, colores y tipografía |
 | Qué hace la empresa | Portada y sección "Qué hacemos" |
 | Problema que resuelve | Sección "Tres tarifas al año no bastan" |
+| Prueba con datos oficiales | Sección "Por qué lo sabemos", con el gráfico del ISTAC que compara la demanda real con las tres tarifas |
 | Servicios | Sección "Qué hacemos" (4 servicios) y "Cómo funciona" (3 pasos) |
 | Sectores o clientes | Sección "Para quién es" |
 | Propuesta de valor | Banda azul antes del contacto |

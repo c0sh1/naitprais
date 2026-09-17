@@ -115,7 +115,6 @@ p {
   font: inherit;
   font-weight: 700;
   text-decoration: none;
-  white-space: nowrap;
   cursor: pointer;
   transition: background-color 0.15s ease, color 0.15s ease;
 }
@@ -142,6 +141,7 @@ p {
 .boton--pequeno {
   padding: 0.5rem 1rem;
   font-size: 0.95rem;
+  white-space: nowrap;
 }
 
 /* ---------- Cabecera ---------- */
@@ -399,6 +399,11 @@ p {
 /* ---------- Secciones ---------- */
 .seccion {
   padding: clamp(3.5rem, 8vw, 6rem) 0;
+}
+
+/* Deja hueco para la cabecera fija al llegar desde el menú */
+section[id] {
+  scroll-margin-top: 88px;
 }
 
 .seccion--clara {
@@ -683,23 +688,51 @@ p {
   }
 }
 
+@media (max-width: 520px) {
+  /* En pantallas estrechas el botón de la cabecera no cabe junto a la marca */
+  .cabecera .boton--pequeno {
+    padding: 0.45rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .marca {
+    font-size: 1.15rem;
+  }
+
+  .cabecera__fila {
+    gap: 0.75rem;
+  }
+}
+
 @media (max-width: 480px) {
   .calendario {
     padding: 1rem;
   }
 
+  /* Sin esto, el calendario no deja encoger la columna en pantallas muy estrechas */
+  .portada__rejilla > *,
+  .calendario__semana,
+  .calendario__dias,
+  .dia {
+    min-width: 0;
+  }
+
   .calendario__semana,
   .calendario__dias {
-    gap: 4px;
+    gap: 3px;
   }
 
   .dia {
-    min-height: 46px;
-    padding: 4px 3px;
+    min-height: 44px;
+    padding: 4px 2px;
+  }
+
+  .dia__numero {
+    font-size: 0.68rem;
   }
 
   .dia__precio {
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     white-space: nowrap;
   }
 }
@@ -1231,4 +1264,85 @@ p {
 
 .enlace-panel {
   margin: 1.8rem 0 0;
+}
+
+/* ---------- Por qué lo sabemos (datos del ISTAC) ---------- */
+.seccion--datos {
+  background: var(--bruma);
+  border-block: 1px solid #c4d5e2;
+}
+
+.evidencia {
+  margin: 0 0 2rem;
+  padding: 1.5rem;
+  background: var(--blanco);
+  border-radius: 14px;
+}
+
+.evidencia img {
+  width: 100%;
+  height: auto;
+}
+
+.evidencia figcaption {
+  margin-top: 0.8rem;
+  font-size: 0.9rem;
+  color: var(--ceniza);
+  max-width: 68ch;
+}
+
+.desfases {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--atlantico);
+}
+
+.desfase__mes {
+  margin: 0 0 0.2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--atlantico);
+}
+
+.desfase__dato {
+  margin: 0 0 0.4rem;
+  font-weight: 700;
+  color: var(--buganvilla-oscura);
+  font-variant-numeric: tabular-nums;
+}
+
+.desfase__texto {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--ceniza);
+}
+
+.fuente {
+  margin: 2rem 0 0;
+  font-size: 0.9rem;
+  color: var(--ceniza);
+  max-width: none;
+}
+
+@media (max-width: 860px) {
+  .desfases {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .evidencia {
+    padding: 1rem;
+    overflow-x: auto;           /* en móvil el gráfico se desplaza en horizontal */
+  }
+
+  .evidencia img {
+    min-width: 620px;           /* por debajo de este ancho no se leen las etiquetas */
+  }
+
+  .evidencia figcaption {
+    position: sticky;
+    left: 0;
+  }
 }

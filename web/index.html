@@ -21,6 +21,7 @@
       </a>
       <nav class="menu" aria-label="Principal">
         <a href="#problema">Problema</a>
+        <a href="#datos">Los datos</a>
         <a href="#servicios">Servicios</a>
         <a href="#ejemplo">Ejemplo</a>
         <a href="#contacto">Contacto</a>
@@ -123,6 +124,52 @@
             </li>
           </ul>
         </div>
+      </div>
+    </section>
+
+    <!-- Por qué lo sabemos -->
+    <section class="seccion seccion--datos" id="datos">
+      <div class="contenedor">
+        <div class="encabezado">
+          <h2>Por qué lo sabemos</h2>
+          <p>
+            No lo suponemos: lo comparamos. El Instituto Canario de Estadística publica cada mes
+            cuánto ingresa una vivienda vacacional en cada municipio. Esa es la demanda real de tu zona.
+          </p>
+        </div>
+
+        <figure class="evidencia">
+          <img src="assets/demanda-mercado.png"
+               alt="Gráfico que compara la demanda real del mercado según el ISTAC con el nivel de precio de una gestora que usa tres tarifas al año: en abril el precio va muy por encima de la demanda, y en noviembre y diciembre muy por debajo."
+               width="1284" height="571">
+          <figcaption>
+            Demanda real del mercado (azul) frente a las tres tarifas de una gestora (rosa),
+            en los cinco municipios de un cliente. Índice: 100 = mes medio del año.
+          </figcaption>
+        </figure>
+
+        <div class="desfases">
+          <div class="desfase">
+            <p class="desfase__mes">Abril</p>
+            <p class="desfase__dato">Demanda 88, precio 108</p>
+            <p class="desfase__texto">Se cobra como temporada alta y es uno de los meses más flojos.</p>
+          </div>
+          <div class="desfase">
+            <p class="desfase__mes">Agosto</p>
+            <p class="desfase__dato">Demanda 112, precio 100</p>
+            <p class="desfase__texto">Tan fuerte como enero, pero cobrado con la tarifa de verano.</p>
+          </div>
+          <div class="desfase">
+            <p class="desfase__mes">Noviembre y diciembre</p>
+            <p class="desfase__dato">Demanda 124, precio 108</p>
+            <p class="desfase__texto">Los meses más fuertes del año, al mismo precio que abril.</p>
+          </div>
+        </div>
+
+        <p class="fuente">
+          Fuente: <a href="https://datos.canarias.es/catalogos/estadisticas/dataset/urn-siemac-org-siemac-metamac-infomodel-statisticalresources-dataset-istac-c00065a_000061" rel="noopener">Instituto Canario de Estadística (ISTAC)</a>,
+          viviendas vacacionales por municipios. Media de 2023 a 2025.
+        </p>
       </div>
     </section>
 
