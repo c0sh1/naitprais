@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de precios | NaitPrais</title>
+  <meta name="description" content="Panel de precios recomendados de NaitPrais para Tabaiba Stays.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="pagina-panel">
+
+  <header class="cabecera">
+    <div class="contenedor cabecera__fila">
+      <a class="marca" href="index.html" aria-label="NaitPrais, ir a la web">
+        <img src="assets/logo.svg" alt="" width="36" height="36">
+        <span>NaitPrais</span>
+      </a>
+      <nav class="menu" aria-label="Principal">
+        <a href="index.html">Web</a>
+        <a href="panel.html" aria-current="page">Panel</a>
+      </nav>
+      <span class="cliente-activo">Cliente: <strong>Tabaiba Stays</strong></span>
+    </div>
+  </header>
+
+  <main class="contenedor panel">
+
+    <section class="panel__intro">
+      <div>
+        <h1 class="panel__titulo">Panel de precios</h1>
+        <p class="panel__sub" id="panel-sub">Cargando recomendaciones…</p>
+      </div>
+      <div class="filtros" role="group" aria-label="Filtros">
+        <label>Mes
+          <select id="filtro-mes"></select>
+        </label>
+        <label>Municipio
+          <select id="filtro-municipio"><option value="">Todos</option></select>
+        </label>
+        <label>Segmento
+          <select id="filtro-segmento"><option value="">Todos</option></select>
+        </label>
+      </div>
+    </section>
+
+    <p class="aviso-error" id="aviso-error" hidden>
+      No se han podido cargar las recomendaciones. Comprueba que el archivo
+      <code>assets/recomendaciones.json</code> existe y abre la página desde un servidor
+      (<code>python -m http.server</code>), no con doble clic.
+    </p>
+
+    <!-- Resumen del mes -->
+    <section class="cifras" aria-label="Resumen del mes">
+      <div class="cifra">
+        <span class="cifra__etiqueta">Ingresos esperados con tus precios</span>
+        <span class="cifra__valor" id="cifra-actual">–</span>
+      </div>
+      <div class="cifra">
+        <span class="cifra__etiqueta">Con los precios de NaitPrais</span>
+        <span class="cifra__valor" id="cifra-recomendado">–</span>
+      </div>
+      <div class="cifra cifra--destacada">
+        <span class="cifra__etiqueta">Diferencia</span>
+        <span class="cifra__valor" id="cifra-diferencia">–</span>
+      </div>
+      <div class="cifra">
+        <span class="cifra__etiqueta">Cambios recomendados</span>
+        <span class="cifra__valor cifra__valor--texto" id="cifra-cambios">–</span>
+      </div>
+    </section>
+
+    <div class="aviso-evento" id="aviso-evento" hidden></div>
+
+    <div class="panel__columnas">
+      <!-- Prioridades -->
+      <section class="bloque">
+        <h2 class="bloque__titulo">Empieza por estas cinco viviendas</h2>
+        <p class="bloque__nota">Son las que más ingresos ganan con el cambio este mes.</p>
+        <ol class="prioridades" id="prioridades"></ol>
+      </section>
+
+      <!-- Año completo -->
+      <section class="bloque">
+        <h2 class="bloque__titulo">Próximos 12 meses</h2>
+        <p class="bloque__nota">Ingresos esperados de las viviendas filtradas. Pulsa un mes para verlo.</p>
+        <div id="grafico-anual" class="grafico"></div>
+        <p class="total-anual" id="total-anual"></p>
+      </section>
+    </div>
+
+    <!-- Tabla -->
+    <section class="bloque">
+      <div class="bloque__cabecera">
+        <h2 class="bloque__titulo">Todas las viviendas</h2>
+        <label class="casilla">
+          <input type="checkbox" id="solo-cambios"> Ver solo las que cambian
+        </label>
+      </div>
+      <div class="tabla-contenedor tabla-contenedor--alta">
+        <table class="tabla tabla--panel">
+          <thead>
+            <tr>
+              <th scope="col">Vivienda</th>
+              <th scope="col">Segmento</th>
+              <th scope="col" class="num">Precio actual</th>
+              <th scope="col" class="num">Recomendado</th>
+              <th scope="col" class="num">Ocupación prevista</th>
+              <th scope="col" class="num">Ingresos extra del mes</th>
+              <th scope="col">Acción</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-cuerpo"></tbody>
+        </table>
+      </div>
+      <p class="bloque__nota">Los precios son de los días normales; debajo se indica el de las fechas especiales. Los ingresos extra incluyen ambos. Pulsa una vivienda para ver su detalle y probar otros precios.</p>
+    </section>
+
+    <!-- Detalle de una vivienda -->
+    <section class="bloque detalle" id="detalle" hidden tabindex="-1">
+      <div class="bloque__cabecera">
+        <div>
+          <h2 class="bloque__titulo" id="detalle-titulo"></h2>
+          <p class="bloque__nota" id="detalle-datos"></p>
+        </div>
+        <button type="button" class="boton boton--secundario boton--pequeno" id="detalle-cerrar">Cerrar detalle</button>
+      </div>
+
+      <div class="panel__columnas">
+        <div>
+          <h3 class="subtitulo">Precio actual y recomendado, mes a mes</h3>
+          <div id="grafico-vivienda" class="grafico"></div>
+          <p class="bloque__nota" id="detalle-motivo"></p>
+        </div>
+
+        <div class="simulador">
+          <h3 class="subtitulo" id="simulador-titulo">Simulador</h3>
+          <label class="simulador__control">
+            <span>Precio por noche: <strong id="sim-precio">–</strong></span>
+            <input type="range" id="sim-rango" min="0" max="100" step="5">
+          </label>
+          <dl class="simulador__resultados">
+            <div><dt>Ocupación esperada</dt><dd id="sim-ocupacion">–</dd></div>
+            <div><dt>Noches ocupadas</dt><dd id="sim-noches">–</dd></div>
+            <div><dt>Ingresos esperados</dt><dd id="sim-ingresos">–</dd></div>
+            <div><dt>Frente a tu precio actual</dt><dd id="sim-diferencia">–</dd></div>
+          </dl>
+          <div class="simulador__botones">
+            <button type="button" class="boton boton--secundario boton--pequeno" id="sim-actual">Precio actual</button>
+            <button type="button" class="boton boton--principal boton--pequeno" id="sim-recomendado">Precio recomendado</button>
+          </div>
+          <p class="bloque__nota">El simulador usa el mismo modelo que las recomendaciones (días normales del mes elegido).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cómo se calcula -->
+    <details class="bloque explicacion">
+      <summary>Cómo se calculan las recomendaciones</summary>
+      <div class="explicacion__texto">
+        <p>
+          Un modelo de regresión logística estima la probabilidad de que cada noche esté ocupada según el precio,
+          la demanda real del municipio en ese mes (datos del ISTAC), si es una fecha especial y las características
+          de la vivienda. Para cada vivienda y mes probamos precios entre un 15&nbsp;% menos y un 15&nbsp;% más que el actual
+          (hasta un 25&nbsp;% más en fechas especiales) y elegimos el que deja más ingresos.
+        </p>
+        <p id="explicacion-modelo"></p>
+        <p>
+          El histórico casi no tiene cambios de precio, así que el efecto del precio se mide con poca precisión.
+          Por prudencia usamos un efecto más fuerte que el estimado. Esta tabla muestra cuánto cambiaría el resultado
+          en los próximos 12 meses con otros valores:
+        </p>
+        <div class="tabla-contenedor">
+          <table class="tabla tabla--compacta">
+            <thead>
+              <tr>
+                <th scope="col">Efecto del precio</th>
+                <th scope="col" class="num">Mejora de ingresos</th>
+                <th scope="col" class="num">Subir</th>
+                <th scope="col" class="num">Mantener</th>
+                <th scope="col" class="num">Bajar</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-sensibilidad"></tbody>
+          </table>
+        </div>
+        <p>Recomendamos aplicar los cambios de forma gradual y revisar cada mes cómo responden las reservas.</p>
+      </div>
+    </details>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor pie__fila">
+      <p>© 2026 NaitPrais. Proyecto académico: Tabaiba Stays es una empresa ficticia y sus datos son simulados.</p>
+      <p>Demanda del mercado: Instituto Canario de Estadística (ISTAC).</p>
+    </div>
+  </footer>
+
+  <script src="panel.js"></script>
+</body>
+</html>

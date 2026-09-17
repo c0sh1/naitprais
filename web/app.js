@@ -13,7 +13,7 @@ const CARNAVAL = { desde: 12, hasta: 22 };
 
 const PRECIOS = {
   actual: { normal: 100, carnaval: 100 },
-  naitprais: { normal: 110, carnaval: 125 },
+  naitprais: { normal: 115, carnaval: 125 },
 };
 
 const EXPLICACIONES = {
@@ -21,7 +21,7 @@ const EXPLICACIONES = {
     "La gestora cobró 100\u00a0€ todas las noches, también en Carnaval. " +
     "El mes se llenó al 96\u00a0% y las reservas de Carnaval llegaron con casi un mes de antelación.",
   naitprais:
-    "Con la ocupación que tuvo, 110\u00a0€ de base y 125\u00a0€ en Carnaval habrían dejado 435\u00a0€ más. " +
+    "Con la ocupación que tuvo, 115\u00a0€ de base y 125\u00a0€ en Carnaval habrían dejado 515\u00a0€ más. " +
     "Es un máximo: con precios más altos puede entrar alguna reserva menos.",
 };
 
