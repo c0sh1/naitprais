@@ -632,49 +632,6 @@ p {
   color: var(--ceniza);
 }
 
-.formulario {
-  padding: 1.8rem;
-  background: var(--blanco);
-  border: 1px solid var(--linea);
-  border-radius: 14px;
-}
-
-.campo {
-  margin-bottom: 1.1rem;
-}
-
-.campo label {
-  display: block;
-  margin-bottom: 0.35rem;
-  font-weight: 700;
-  font-size: 0.95rem;
-}
-
-.campo input,
-.campo select,
-.campo textarea {
-  width: 100%;
-  padding: 0.7rem 0.8rem;
-  border: 1px solid #bdbbb4;
-  border-radius: 8px;
-  background: var(--blanco);
-  color: var(--picon);
-  font: inherit;
-}
-
-.campo input[aria-invalid="true"] {
-  border-color: var(--buganvilla);
-}
-
-.formulario__estado {
-  margin: 1rem 0 0;
-  font-size: 0.95rem;
-}
-
-.formulario__estado--error {
-  color: var(--buganvilla-oscura);
-}
-
 /* Pie */
 .pie {
   padding: 2rem 0;

@@ -1,10 +1,9 @@
 // =============================================================
 // NaitPrais - interacción de la web
-// 1. Calendario de la portada (precio actual / con NaitPrais)
-// 2. Formulario de contacto (abre el correo con los datos)
+// Calendario de la portada (precio actual / con NaitPrais)
 // =============================================================
 
-// ---------- 1. Calendario ----------
+// ---------- Calendario de la portada ----------
 // Datos de febrero de 2026 de un apartamento de Tabaiba Stays (datos simulados del proyecto).
 // "1" = noche reservada, "0" = noche libre.
 const OCUPACION_FEBRERO = "1110111111111111111111111111";
@@ -88,47 +87,5 @@ function prepararSelector() {
   });
 }
 
-// ---------- 2. Formulario ----------
-function prepararFormulario() {
-  const formulario = document.getElementById("formulario");
-  const estado = document.getElementById("formulario-estado");
-  if (!formulario) return;
-
-  formulario.addEventListener("submit", (evento) => {
-    evento.preventDefault();
-
-    const nombre = formulario.nombre;
-    const email = formulario.email;
-    let correcto = true;
-
-    [nombre, email].forEach((campo) => {
-      const valido = campo.value.trim() !== "" && campo.checkValidity();
-      campo.setAttribute("aria-invalid", valido ? "false" : "true");
-      if (!valido) correcto = false;
-    });
-
-    if (!correcto) {
-      estado.textContent = "Escribe tu nombre y un correo electrónico válido para continuar.";
-      estado.className = "formulario__estado formulario__estado--error";
-      return;
-    }
-
-    const asunto = `Demo de NaitPrais para ${nombre.value.trim()}`;
-    const cuerpo =
-      `Nombre: ${nombre.value.trim()}\n` +
-      `Correo: ${email.value.trim()}\n` +
-      `Viviendas que gestiono: ${formulario.viviendas.value}\n\n` +
-      `${formulario.mensaje.value.trim()}`;
-
-    window.location.href =
-      `mailto:hola@naitprais.es?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
-
-    estado.textContent =
-      "Hemos abierto tu programa de correo con la solicitud. Si no se ha abierto, escríbenos a hola@naitprais.es.";
-    estado.className = "formulario__estado";
-  });
-}
-
 pintarCalendario("actual");
 prepararSelector();
-prepararFormulario();

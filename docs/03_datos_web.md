@@ -185,7 +185,7 @@ La web está en la carpeta `web/` y usa solo HTML, CSS y JavaScript, sin framewo
 | Sectores o clientes | Sección "Para quién es" |
 | Propuesta de valor | Banda azul antes del contacto |
 | Ejemplo de solución | Calendario interactivo de la portada y sección "Un caso práctico: Tabaiba Stays" |
-| Contacto | Formulario (abre el correo con los datos rellenados), correo y oficina |
+| Contacto | Correo, teléfono y oficina |
 
 **Elemento principal:** el calendario de la portada muestra febrero de 2026 de un apartamento de Tabaiba Stays con los datos generados: 100 € todas las noches, también en Carnaval, y un 96 % de ocupación. El botón "Con NaitPrais" cambia a los precios recomendados (115 € y 125 € en Carnaval, los mismos que recomienda el panel para febrero de 2027) y muestra cuánto habría ingresado con la misma ocupación.
 
