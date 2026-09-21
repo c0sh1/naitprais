@@ -33,26 +33,49 @@ naitprais/
 
 ## Cómo ejecutarlo
 
-```bash
+Necesitas Python 3.10 o superior. Yo lo he hecho con la 3.11 en Windows.
+
+Primero creo un entorno virtual, para no mezclar estas librerías con las del resto del ordenador:
+
+bash
+python -m venv .venv
+.venv\Scripts\activate        # en Windows (PowerShell)
+source .venv/bin/activate     # en macOS o Linux
+
+Sabes que está activado porque aparece (.venv) al principio de la línea. Luego instalo lo que hace falta:
+
+bash
 pip install -r requirements.txt
 
+Son cinco librerías: pandas y numpy para manejar los datos, scikit-learn para el modelo, matplotlib para los gráficos y requests para descargar los datos del ISTAC. También instala jupyter, que hace falta solo para abrir el notebook del análisis.
+
+Las versiones están puestas con un mínimo (>=) y no fijadas. Lo hice así porque entrené el modelo con una versión de scikit-learn y al abrirlo en otro ordenador con una distinta me salía un aviso de incompatibilidad. Con mínimos funciona en los dos sitios.
+
+Después, los scripts en este orden, porque cada uno necesita lo que deja el anterior:
+
+bash
 python src/generate_data.py   # genera los datos simulados del cliente
 python src/fetch_istac.py     # descarga los datos reales del ISTAC (necesita internet)
 python src/check_data.py      # comprueba que los datos son coherentes
 python src/train.py           # entrena el modelo y lo evalúa
 python src/recommend.py       # calcula los precios recomendados
-```
 
-Hay que ejecutarlos en ese orden, porque cada uno necesita lo del anterior.
+Se ejecutan desde la carpeta del proyecto, no desde dentro de src. Si estás dentro, sal con cd .. primero.
 
-Para ver la web y el panel:
+Al terminar tienes data/naitprais.db con la base de datos, models/ con el modelo y sus métricas, y web/assets/recomendaciones.json, que es lo que lee el panel.
 
-```bash
+Para ver el análisis:
+
+bash
+jupyter notebook notebooks/eda.ipynb
+
+Y para ver la web y el panel:
+
+bash
 cd web
 python -m http.server
-```
 
-Y abrir `http://localhost:8000`. El panel está en `/panel.html`. **Ojo:** si abres el HTML con doble clic el panel sale vacío, porque el navegador no deja leer el JSON de los datos. Hay que levantar el servidor.
+Abriendo http://localhost:8000. El panel está en /panel.html. Ojo: si abres el HTML con doble clic el panel sale vacío, porque el navegador no deja leer el JSON desde un archivo local. Hay que levantar el servidor.
 
 ## Documentación
 
