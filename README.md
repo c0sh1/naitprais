@@ -1,12 +1,14 @@
 # NaitPrais
 
-Precios para viviendas vacacionales en Canarias.
+**Precios para viviendas vacacionales en Canarias.**
 
-Este es mi proyecto del segundo módulo de Big Data del bootcamp. La idea era montar una startup ficticia, inventarnos un cliente y resolverle un problema real con datos. La mía se llama NaitPrais (*night price*) y se dedica a decirle a las gestoras de viviendas vacacionales qué precio poner cada mes.
+Este es mi proyecto del segundo módulo de Big Data del bootcamp de Upgrade-Hub. La idea era montar una startup ficticia, inventarnos un cliente y resolverle un problema real con datos. La mía se llama NaitPrais (*night price*) y se dedica a decirle a las gestoras de viviendas vacacionales qué precio poner cada mes.
 
 El cliente es **Tabaiba Stays**, una gestora inventada de Adeje con 60 viviendas en Tenerife y Gran Canaria. Su problema: ponen los precios (sintéticos) con tres tarifas al año en un Excel, así que cobran lo mismo un martes de octubre que la semana de Carnaval.
 
-**Web y panel:** https://naitprais.vercel.app/index.html
+> **Web y panel en vivo:** https://naitprais.vercel.app
+
+---
 
 ## Lo que encontré
 
@@ -15,67 +17,94 @@ Lo que más me sorprendió salió de cruzar los datos del cliente con los del IS
 - **Sus tres tarifas no encajan con la demanda real.** Abril lo cobran como temporada alta y es de los meses más flojos. Noviembre y diciembre son los más fuertes del año y los cobran igual que abril.
 - **Navidad, Carnaval y Semana Santa se llenan al 95 % con casi dos meses de antelación, y al mismo precio que un día normal.** Si algo se agota tan pronto, es que está barato.
 - **En Adeje, que es donde más viviendas tienen, ingresan un 31 % menos que la media del municipio.**
-- En 2026 hay un 10 % menos de viviendas vacacionales en la zona, pero cada una ingresa más. Menos competencia.
+- En 2026 hay un **10 % menos** de viviendas vacacionales en la zona, pero cada una ingresa más. Menos competencia.
 
 Con eso monté un modelo que predice si una noche se va a ocupar según su precio, y un panel donde el cliente ve qué precio poner a cada vivienda y por cuáles empezar.
+
+---
 
 ## Estructura
 
 ```
 naitprais/
-├── data/        Base de datos SQLite, el esquema y los datos del ISTAC
-├── docs/        La documentación de cada fase del proyecto
-├── models/      El modelo entrenado y sus métricas
-├── notebooks/   El análisis exploratorio
-├── src/         Los scripts de Python
-└── web/         La web de la startup y el panel de precios
+├── data/               Base de datos SQLite, el esquema y los datos del ISTAC
+├── docs/               La documentación de cada fase del proyecto
+├── models/             El modelo entrenado y sus métricas
+├── notebooks/          El análisis exploratorio
+├── src/                Los scripts de Python
+├── web/                La web de la startup y el panel de precios
+└── requirements.txt    Las librerías que hacen falta
 ```
+
+---
 
 ## Cómo ejecutarlo
 
-Necesitas Python 3.10 o superior. Yo lo he hecho con la 3.11 en Windows.
+Necesitas **Python 3.10 o superior**. Yo lo he hecho con la 3.11 en Windows.
 
-Primero creo un entorno virtual, para no mezclar estas librerías con las del resto del ordenador:
+### 1. Entorno virtual
 
-bash
+Lo creo para no mezclar estas librerías con las del resto del ordenador:
+
+```bash
 python -m venv .venv
-.venv\Scripts\activate        # en Windows (PowerShell)
-source .venv/bin/activate     # en macOS o Linux
 
-Sabes que está activado porque aparece (.venv) al principio de la línea. Luego instalo lo que hace falta:
+.venv\Scripts\activate        # Windows (PowerShell)
+source .venv/bin/activate     # macOS o Linux
+```
 
-bash
+Sabes que está activado porque aparece `(.venv)` al principio de la línea.
+
+### 2. Instalar las librerías
+
+```bash
 pip install -r requirements.txt
+```
 
-Son cinco librerías: pandas y numpy para manejar los datos, scikit-learn para el modelo, matplotlib para los gráficos y requests para descargar los datos del ISTAC. También instala jupyter, que hace falta solo para abrir el notebook del análisis.
+| Librería | Para qué |
+|---|---|
+| `pandas` y `numpy` | Manejar los datos |
+| `scikit-learn` | El modelo |
+| `matplotlib` | Los gráficos |
+| `requests` | Descargar los datos del ISTAC |
+| `jupyter` | Solo para abrir el notebook del análisis |
 
-Las versiones están puestas con un mínimo (>=) y no fijadas. Lo hice así porque entrené el modelo con una versión de scikit-learn y al abrirlo en otro ordenador con una distinta me salía un aviso de incompatibilidad. Con mínimos funciona en los dos sitios.
+Las versiones están puestas con un mínimo (`>=`) y no fijadas. Lo hice así porque entrené el modelo con una versión de scikit-learn y al abrirlo en otro ordenador con una distinta me salía un aviso de incompatibilidad. Con mínimos funciona en los dos sitios.
 
-Después, los scripts en este orden, porque cada uno necesita lo que deja el anterior:
+### 3. Los scripts, en este orden
 
-bash
+Cada uno necesita lo que deja el anterior:
+
+```bash
 python src/generate_data.py   # genera los datos simulados del cliente
 python src/fetch_istac.py     # descarga los datos reales del ISTAC (necesita internet)
 python src/check_data.py      # comprueba que los datos son coherentes
 python src/train.py           # entrena el modelo y lo evalúa
 python src/recommend.py       # calcula los precios recomendados
+```
 
-Se ejecutan desde la carpeta del proyecto, no desde dentro de src. Si estás dentro, sal con cd .. primero.
+Se ejecutan **desde la carpeta del proyecto**, no desde dentro de `src`. Si estás dentro, sal con `cd ..` primero.
 
-Al terminar tienes data/naitprais.db con la base de datos, models/ con el modelo y sus métricas, y web/assets/recomendaciones.json, que es lo que lee el panel.
+Al terminar tienes `data/naitprais.db` con la base de datos, `models/` con el modelo y sus métricas, y `web/assets/recomendaciones.json`, que es lo que lee el panel.
 
-Para ver el análisis:
+### 4. Ver el análisis
 
-bash
+```bash
 jupyter notebook notebooks/eda.ipynb
+```
 
-Y para ver la web y el panel:
+### 5. Ver la web y el panel
 
-bash
+```bash
 cd web
 python -m http.server
+```
 
-Abriendo http://localhost:8000. El panel está en /panel.html. Ojo: si abres el HTML con doble clic el panel sale vacío, porque el navegador no deja leer el JSON desde un archivo local. Hay que levantar el servidor.
+Y abrir `http://localhost:8000`. El panel está en `/panel.html`.
+
+> **Ojo:** si abres el HTML con doble clic, el panel sale vacío. El navegador no deja leer el JSON desde un archivo local, así que hay que levantar el servidor.
+
+---
 
 ## Documentación
 
@@ -90,12 +119,16 @@ Abriendo http://localhost:8000. El panel está en /panel.html. Ojo: si abres el 
 | [fuentes.md](docs/fuentes.md) | Las fuentes que usé |
 | [modelo_datos_ER.mmd](docs/modelo_datos_ER.mmd) | El diagrama entidad-relación ([imagen](docs/img/modelo_datos_ER.png)) |
 
+---
+
 ## Sobre los datos
 
 Esto es importante y lo explico mejor en [datos_reales_y_simulados.md](docs/datos_reales_y_simulados.md):
 
 - **Los datos del cliente son simulados.** Tabaiba Stays no existe, así que sus reservas las genero yo con un script. Eso sí, la estacionalidad está calibrada con los ingresos reales de Canarias, para que los patrones tengan sentido.
 - **Los datos del mercado son reales.** Son 455 filas del ISTAC con los datos de los cinco municipios, de 2019 a 2026.
+
+---
 
 ## Lo que no funciona del todo
 
@@ -105,12 +138,16 @@ Prefiero decirlo yo:
 - **El modelo se equivoca en unos 13 puntos** al predecir la ocupación de un mes. Sirve para saber si hay que subir o bajar, no para prometer una ocupación exacta. Aun así es mejor que la alternativa, que sería repetir lo del año pasado (15,3 puntos).
 - **La estancia media que genero (8,3 noches) es casi el doble que la real del ISTAC (4,8).** Me di cuenta tarde y no me dio tiempo a rehacer la simulación.
 
+---
+
 ## Tecnologías
 
 - **Python** para los datos y el modelo: pandas, scikit-learn y matplotlib.
 - **SQLite** para la base de datos.
 - **HTML, CSS y JavaScript** para la web y el panel, sin frameworks. Están en Vercel.
 - **Mermaid** para el diagrama entidad-relación.
+
+---
 
 ## Lo que aprendí
 
